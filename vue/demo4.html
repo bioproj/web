@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>拆分模块</title>
+    <title>从npm包不能导入</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         curl https://unpkg.com/vue@3/dist/vue.global.js -O vue.global.js
     </pre>
     <script src="vue.global.js"></script>
-    <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+    <!-- <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/customParseFormat.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/weekday.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/localeData.js"></script>
@@ -20,7 +20,8 @@
     <script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@4.2.6/dist/antd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@4.2.6/dist/antd.min.js"></script> -->
+
     <div id="app">
         <span>{{message}}</span>
     </div>
@@ -29,7 +30,7 @@
         <span>{{message}}</span>
         <my-component></my-component>
         <my-component></my-component>
-        <date-picker></date-picker>
+        <!-- <date-picker></date-picker> -->
         <p>在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 antd。<a href="https://antdv.com/docs/vue/introduce-cn">参考</a> </p>
     </div>
     <script type="module">
@@ -45,7 +46,7 @@
         })
         app.mount('#app')
         import MyComponent from './my-component.js'
-        const { DatePicker } = antd
+        // import DatePicker from './node_modules/ant-design-vue/lib/date-picker/index.js'
 
         const app2 = createApp({
             setup() {
@@ -57,9 +58,9 @@
         })
 
         app2.component('MyComponent', MyComponent)
-        app2.component('DatePicker', DatePicker)
+        // app2.component('DatePicker', DatePicker)
 
-        app2.use(DatePicker);
+        app2.use(MyComponent);
 
         app2.mount('#app2')
     </script>
