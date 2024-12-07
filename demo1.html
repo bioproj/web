@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拆分模块</title>
+</head>
+<body>
+    <pre>
+        curl https://unpkg.com/vue@3/dist/vue.global.js -O vue.global.js
+    </pre>
+    <script src="vue.global.js"></script>
+    <div id="app"></div>
+    <script type="module">
+         const { createApp, ref } = Vue
+        import MyComponent from './my-component.js'
+
+        createApp(MyComponent).mount('#app')
+    </script>
+</body>
+
+</html>
