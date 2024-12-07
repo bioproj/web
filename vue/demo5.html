@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拆分模块</title>
+</head>
+
+<body>
+    <pre>
+        curl https://unpkg.com/vue@3/dist/vue.global.js -O vue.global.js
+    </pre>
+    <script src="vue.global.js"></script>
+    <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/customParseFormat.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/weekday.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/localeData.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/weekOfYear.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
+    <script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@4.2.6/dist/antd.min.js"></script>
+    <div id="app">
+        <span>{{message}}</span>
+    </div>
+    <hr>
+    <div id="app2">
+        <span>{{message}}</span>
+        <my-component></my-component>
+        <my-component></my-component>
+        <date-picker></date-picker>
+        <cascader :options="[
+        {
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [
+            {
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              children: [
+                {
+                  value: 'xihu',
+                  label: 'West Lake',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [
+            {
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [
+                {
+                  value: 'zhonghuamen',
+                  label: 'Zhong Hua Men',
+                },
+              ],
+            },
+          ],
+        },
+      ]" ></cascader>
+        <p>在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 antd。<a href="https://antdv.com/docs/vue/introduce-cn">参考</a> </p>
+    </div>
+    <script type="module">
+        const { createApp, ref } = Vue
+
+        const app = createApp({
+            setup() {
+                const message = ref('Hello Vue!')
+                return {
+                    message
+                }
+            }
+        })
+        app.mount('#app')
+        import MyComponent from './my-component.js'
+        const { DatePicker,Cascader } = antd
+
+        const app2 = createApp({
+            setup() {
+                const message = ref('Hello Vue2!')
+                return {
+                    message
+                }
+            }
+        })
+
+        app2.component('MyComponent', MyComponent)
+        app2.component('DatePicker', DatePicker)
+        app2.component('Cascader', Cascader)
+
+        app2.use(DatePicker);
+
+        app2.mount('#app2')
+    </script>
+
+</body>
+
+</html>
