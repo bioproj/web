@@ -12,7 +12,7 @@
         curl https://unpkg.com/vue@3/dist/vue.global.js -O vue.global.js
     </pre>
     <script src="vue.global.js"></script>
-    <!-- <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/customParseFormat.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/weekday.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/localeData.js"></script>
@@ -20,8 +20,10 @@
     <script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
     <script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@4.2.6/dist/antd.min.js"></script> -->
-
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@4.2.6/dist/antd.min.js"></script> -->
+    <!-- https://juejin.cn/post/7271073423076409384 -->
+    <!-- https://cn.vuejs.org/guide/quick-start.html -->
+    <!-- https://antdv.com/docs/vue/introduce -->
     <div id="app">
         <span>{{message}}</span>
     </div>
@@ -30,9 +32,17 @@
         <span>{{message}}</span>
         <my-component></my-component>
         <my-component></my-component>
-        <!-- <date-picker></date-picker> -->
+        <date-picker></date-picker>
         <p>在浏览器中使用 script 和 link 标签直接引入文件，并使用全局变量 antd。<a href="https://antdv.com/docs/vue/introduce-cn">参考</a> </p>
     </div>
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "./vue.esm-browser.js",
+            "ant-design-vue": "./node_modules/ant-design-vue/dist/antd.esm.min.js"
+          }
+        }
+      </script>
     <script type="module">
         const { createApp, ref } = Vue
 
@@ -46,7 +56,7 @@
         })
         app.mount('#app')
         import MyComponent from './my-component.js'
-        // import DatePicker from './node_modules/ant-design-vue/lib/date-picker/index.js'
+        // import {DatePicker} from './node_modules/ant-design-vue/lib/date-picker'
 
         const app2 = createApp({
             setup() {
@@ -56,9 +66,10 @@
                 }
             }
         })
+        import { DatePicker } from 'ant-design-vue';
 
         app2.component('MyComponent', MyComponent)
-        // app2.component('DatePicker', DatePicker)
+        app2.component('DatePicker', DatePicker)
 
         app2.use(MyComponent);
 
