@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拆分模块</title>
+</head>
+
+<body>
+    <pre>
+        curl https://unpkg.com/vue@3/dist/vue.global.js -O vue.global.js
+    </pre>
+    <script src="vue.global.js"></script>
+    <div id="app">
+        <span>{{message}}</span>
+    </div>
+    <hr>
+    <div id="app2">
+        <span>{{message}}</span>
+        <my-component></my-component>
+    </div>
+    <script type="module">
+        const { createApp, ref } = Vue
+
+        const app = createApp({
+            setup() {
+                const message = ref('Hello Vue!')
+                return {
+                    message
+                }
+            }
+        })
+        app.mount('#app')
+        import MyComponent from './my-component.js'
+
+        const app2 = createApp({
+            setup() {
+                const message = ref('Hello Vue2!')
+                return {
+                    message
+                }
+            }
+        })
+        app2.component('MyComponent', MyComponent)
+
+        app2.mount('#app2')
+    </script>
+
+</body>
+
+</html>
